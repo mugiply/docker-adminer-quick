@@ -1,13 +1,10 @@
 FROM adminer
 
-ARG DATABASE_HOST
-ARG DATABASE_PORT
-ARG DATABASE_DRIVER
+ENV DATABASE_HOST=db
+ENV DATABASE_PORT=5432
+ENV DATABASE_DRIVER=pgsql
 
-COPY ./adminer/plugins-enabled/ /var/www/html/plugins-enabled/
+COPY ./adminer/plugins-enabled/ /var/www/html/plugins-template/
+COPY start.sh /usr/local/bin/
 
-RUN \
-  sed -i -e "s/%DATABASE_HOST%/${DATABASE_HOST}/g" /var/www/html/plugins-enabled/login-servers.php && \
-  sed -i -e "s/%DATABASE_PORT%/${DATABASE_PORT}/g" /var/www/html/plugins-enabled/login-servers.php && \
-  sed -i -e "s/%DATABASE_DRIVER%/${DATABASE_DRIVER}/g" /var/www/html/plugins-enabled/login-servers.php && \
-  cat /var/www/html/plugins-enabled/login-servers.php
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/start.sh"]

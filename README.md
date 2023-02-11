@@ -1,7 +1,5 @@
 # docker-adminer-quick
 
-```
-$ docker-compose up --build --detach
+This docker image allows you to use Adminer quickly in the development environment.
 
-$ open http://localhost:8080/
-```
+https://hub.docker.com/r/mugiply/adminer-quick

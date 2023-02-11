@@ -11,11 +11,11 @@ services:
   adminer:
     build:
       context: .
-      args:
-        DATABASE_HOST: db
-        DATABASE_PORT: 5432
-        DATABASE_DRIVER: pgsql
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_DRIVER: pgsql
     ports:
-      - 8080:8080
+      - 18080:8080
     depends_on:
       - db
